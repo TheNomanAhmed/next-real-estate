@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { Image } from "cloudinary-react";
-import ReactMapGL, { Marker, Popup, ViewState } from "react-map-gl";
+import ReactMapGL, { Marker, Popup, MapRef } from "react-map-gl";
+import { ViewState } from "react-map-gl/index";
 import "mapbox-gl/dist/mapbox-gl.css";
 // import { useLocalState } from "src/utils/useLocalState";
 // import { HousesQuery_houses } from "src/generated/HousesQuery";
@@ -10,10 +11,10 @@ import "mapbox-gl/dist/mapbox-gl.css";
 interface IProps {}
 
 export default function Map({}: IProps) {
-  const mapRef = useRef<ReactMapGL | null>(null);
+  const mapRef = useRef<MapRef | null>(null);
   const [viewport, setViewport] = useState<ViewState>({
-    latitude: 60.1699,
-    longitude: 24.9384,
+    latitude: 43,
+    longitude: -79,
     zoom: 10,
   });
 
@@ -24,7 +25,7 @@ export default function Map({}: IProps) {
         width="100%"
         height="calc(100vh - 64px)"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        onViewportChange={(nextViewport: any) => setViewport(nextViewport)}
+        onViewportChange={(nextViewport) => setViewport(nextViewport)}
         ref={(instance) => (mapRef.current = instance)}
         minZoom={5}
         maxZoom={15}
