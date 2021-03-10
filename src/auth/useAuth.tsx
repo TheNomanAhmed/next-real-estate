@@ -37,7 +37,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         router.push("/");
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
       });
   };
 

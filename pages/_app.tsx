@@ -10,7 +10,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <Head>
         <title>House Rental Application</title>
-        <link rel="icon" href="/favicon.icot"></link>
+        <link rel="icon" href="/favicon.ico"></link>
       </Head>
 
       <Component {...pageProps} />
