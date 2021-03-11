@@ -16,9 +16,14 @@ const EDIT_HOUSE_QUERY = gql`
       id
       userId
       address
+      description
       image
       publicId
       bedrooms
+      price
+      space
+      build
+      maintainance
       latitude
       longitude
     }

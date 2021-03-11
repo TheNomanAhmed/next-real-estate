@@ -15,8 +15,13 @@ const HOUSES_QUERY = gql`
       latitude
       longitude
       address
+      description
       publicId
       bedrooms
+      price
+      space
+      build
+      maintainance
     }
   }
 `;
@@ -59,8 +64,8 @@ export default function Home() {
       main={
         <div className="flex">
           <div
-            className="w-1/2 pb-4"
-            style={{ maxHeight: "calc(100vh - 64px)", overflowX: "scroll" }}
+            className="w-1/2 pb-2 flex flex-wrap content-start"
+            style={{ maxHeight: "calc(100vh - 64px)", overflowY: "scroll" }}
           >
             <HouseList
               houses={lastData ? lastData.houses : []}

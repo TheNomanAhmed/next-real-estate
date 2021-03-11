@@ -51,6 +51,22 @@ class HouseInput {
 
   @Field((_type) => Int)
   bedrooms!: number;
+
+  @Field((_type) => Int)
+  price!: number;
+
+  @Field((_type) => Int)
+  space!: number;
+
+  @Field((_type) => Int)
+  build!: number;
+
+  @Field((_type) => Int)
+  maintainance!: number;
+
+  @Field((_type) => String)
+  description!: string;
+
 }
 
 @ObjectType()
@@ -81,6 +97,21 @@ class House {
 
   @Field((_type) => Int)
   bedrooms!: number;
+
+  @Field((_type) => Int)
+  price!: number;
+  
+  @Field((_type) => Int)
+  space!: number;
+
+  @Field((_type) => Int)
+  build!: number;
+
+  @Field((_type) => Int)
+  maintainance!: number;
+
+  @Field((_type) => String)
+  description!: string;
 
   @Field((_type) => [House])
   async nearby(@Ctx() ctx: Context) {
@@ -129,9 +160,14 @@ export class HouseResolver {
         userId: ctx.uid,
         image: input.image,
         address: input.address,
+        description: input.description,
         latitude: input.coordinates.latitude,
         longitude: input.coordinates.longitude,
         bedrooms: input.bedrooms,
+        price: input.price,
+        space: input.space,
+        build: input.build,
+        maintainance: input.maintainance,
       },
     });
   }
@@ -153,10 +189,32 @@ export class HouseResolver {
       data: {
         image: input.image,
         address: input.address,
+        description: input.description,
         latitude: input.coordinates.latitude,
         longitude: input.coordinates.longitude,
         bedrooms: input.bedrooms,
+        price: input.price,
+        space: input.space,
+        build: input.build,
+        maintainance: input.maintainance,
       },
     });
+  }
+
+  @Authorized()
+  @Mutation((_returns) => Boolean, { nullable: false })
+  async deleteHouse(
+    @Arg("id") id: string,
+    @Ctx() ctx: AuthorizedContext
+  ): Promise<boolean> {
+    const houseId = parseInt(id, 10);
+    const house = await ctx.prisma.house.findOne({ where: { id: houseId } });
+
+    if (!house || house.userId !== ctx.uid) return false;
+
+    await ctx.prisma.house.delete({
+      where: { id: houseId },
+    });
+    return true;
   }
 }

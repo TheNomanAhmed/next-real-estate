@@ -15,8 +15,13 @@ const SHOW_HOUSE_QUERY = gql`
       id
       userId
       address
+      description
       publicId
       bedrooms
+      price
+      space
+      build
+      maintainance
       latitude
       longitude
       nearby {
@@ -52,11 +57,12 @@ function HouseData({ id }: { id: string }) {
   return (
     <Layout
       main={
-        <div className="sm:block md:flex">
-          <div className="sm:w-full md:w-1/2 p-4">
+        <div className="sm:block md:flex ">
+          <div
+            className="sm:w-full md:w-1/2 p-4"
+            style={{ maxHeight: "calc(100vh - 64px)", overflowY: "scroll" }}
+          >
             <HouseNav house={house} />
-
-            <h1 className="text-3xl my-2">{house.address}</h1>
 
             <Image
               className="pb-2"
@@ -71,8 +77,53 @@ function HouseData({ id }: { id: string }) {
               crop="fill"
               gravity="auto"
             />
+            <div className="flex flex-col md:flex-row justify-between">
+              <div>
+                <h1 className="text-xl lg:text-3xl my-2 font-semibold mb-2">
+                  {house.address}
+                </h1>
+                <p className="text-md lg:text-xl my-2 font-light mb-4 w-3/2">
+                  {house.description}
+                </p>
+              </div>
+              <div className="flex flex-col flex-shrink-0 items-end ml-4">
+                <p className="text-xl lg:text-2xl my-2 font-semibold ">
+                  {house.price.toLocaleString()} €
+                </p>
+                <div className="mb-6">
+                  <span className="mr-2">{house.space}.00 m²</span>
+                  <span className="">
+                    ({Math.round(house.price / house.space).toLocaleString()}{" "}
+                    €/m²)
+                  </span>
+                </div>
+              </div>
+            </div>
 
-            <p>{house.bedrooms} 🛌 house</p>
+            <div className="flex justify-around">
+              <div className="flex items-center">
+                <img src="/build.svg" className="w-8 md:w-12 mr-2" />
+                <div className="flex flex-col">
+                  <span className="text-xs md:text-sm">Built in</span>
+                  <span className="font-medium text-sm md:text-lg">
+                    {house.build}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center">
+                <img src="/maintenance.svg" className="w-8 md:w-12 mr-2" />
+                <div className="flex flex-col">
+                  <span className="text-xs md:text-sm">Maintenance fee</span>
+                  <span className="font-medium text-sm md:text-lg">
+                    {house.maintainance}{" "}
+                    <span className="font-light text-sm md:text-lg">
+                      € / Month
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="sm:w-full md:w-1/2">
             <SingleMap house={house} nearby={house.nearby} />

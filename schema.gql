@@ -16,20 +16,30 @@ input CoordinatesInput {
 type House {
   address: String!
   bedrooms: Int!
+  build: Int!
+  description: String!
   id: ID!
   image: String!
   latitude: Float!
   longitude: Float!
+  maintainance: Int!
   nearby: [House!]!
+  price: Int!
   publicId: String!
+  space: Int!
   userId: String!
 }
 
 input HouseInput {
   address: String!
   bedrooms: Int!
+  build: Int!
   coordinates: CoordinatesInput!
+  description: String!
   image: String!
+  maintainance: Int!
+  price: Int!
+  space: Int!
 }
 
 type ImageSignature {
@@ -40,11 +50,11 @@ type ImageSignature {
 type Mutation {
   createHouse(input: HouseInput!): House
   createImageSignature: ImageSignature!
+  deleteHouse(id: String!): Boolean!
   updateHouse(id: String!, input: HouseInput!): House
 }
 
 type Query {
-  hello: String!
   house(id: String!): House
   houses(bounds: BoundsInput!): [House!]!
 }

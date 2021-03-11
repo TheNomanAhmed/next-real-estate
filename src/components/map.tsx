@@ -22,8 +22,8 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
   const [selected, setSelected] = useState<HousesQuery_houses | null>(null);
   const mapRef = useRef<ReactMapGL | null>(null);
   const [viewport, setViewport] = useLocalState<ViewState>("viewport", {
-    latitude: 43,
-    longitude: -79,
+    latitude: 60.1699,
+    longitude: 24.9384,
     zoom: 10,
   });
 

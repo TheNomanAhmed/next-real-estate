@@ -15,8 +15,13 @@ export interface HousesQuery_houses {
   latitude: number;
   longitude: number;
   address: string;
+  description: string;
   publicId: string;
   bedrooms: number;
+  price: number;
+  space: number;
+  build: number;
+  maintainance: number;
 }
 
 export interface HousesQuery {
