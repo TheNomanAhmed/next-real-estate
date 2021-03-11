@@ -20,9 +20,13 @@ export interface CoordinatesInput {
 export interface HouseInput {
   address: string;
   bedrooms: number;
+  build: number;
   coordinates: CoordinatesInput;
+  description: string;
   image: string;
+  maintainance: number;
   price: number;
+  space: number;
 }
 
 //==============================================================

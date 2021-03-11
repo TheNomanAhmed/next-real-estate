@@ -19,6 +19,10 @@ export interface UpdateHouseMutation_updateHouse {
   bedrooms: number;
   price: number;
   address: string;
+  description: string;
+  space: number;
+  build: number;
+  maintainance: number;
 }
 
 export interface UpdateHouseMutation {

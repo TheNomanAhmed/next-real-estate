@@ -19,9 +19,13 @@ export interface ShowHouseQuery_house {
   id: string;
   userId: string;
   address: string;
+  description: string;
   publicId: string;
   bedrooms: number;
   price: number;
+  space: number;
+  build: number;
+  maintainance: number;
   latitude: number;
   longitude: number;
   nearby: ShowHouseQuery_house_nearby[];

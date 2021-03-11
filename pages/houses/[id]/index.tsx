@@ -15,9 +15,13 @@ const SHOW_HOUSE_QUERY = gql`
       id
       userId
       address
+      description
       publicId
       bedrooms
       price
+      space
+      build
+      maintainance
       latitude
       longitude
       nearby {

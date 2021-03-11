@@ -13,11 +13,11 @@ export default function HouseList({ houses, setHighlightedId }: IProps) {
       {houses.map((house) => (
         <Link key={house.id} href={`/houses/${house.id}`}>
           <div
-            className="px-6 pt-4 cursor-pointer flex flex-wrap"
+            className="px-2 pt-2 cursor-pointer flex flex-col flex-wrap md:w-1/2"
             onMouseEnter={() => setHighlightedId(house.id)}
             onMouseLeave={() => setHighlightedId(null)}
           >
-            <div className="sm:w-full md:w-1/2">
+            <div className="sm:w-full">
               <Image
                 cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
                 publicId={house.publicId}
@@ -31,9 +31,10 @@ export default function HouseList({ houses, setHighlightedId }: IProps) {
                 gravity="auto"
               />
             </div>
-            <div className="sm:w-full md:w-1/2 sm:pl-0 md:pl-4">
-              <h2 className="text-lg">{house.address}</h2>
-              <p>{house.bedrooms} 🛌 house</p>
+            <div className="sm:w-full sm:pl-0 mt-2">
+              <h2 className="text-sm">{house.address}</h2>
+              <div>{house.price} €</div>
+              <p>{house.bedrooms}.0 bd</p>
             </div>
           </div>
         </Link>

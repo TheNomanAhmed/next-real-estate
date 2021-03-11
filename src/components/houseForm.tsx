@@ -43,6 +43,10 @@ const UPDATE_HOUSE_MUTATION = gql`
       bedrooms
       price
       address
+      description
+      space
+      build
+      maintainance
     }
   }
 `;
@@ -78,6 +82,10 @@ interface IFormData {
   bedrooms: string;
   price: string;
   image: FileList;
+  description: string;
+  space: string;
+  build: string;
+  maintainance: string;
 }
 
 interface IHouse {
@@ -87,6 +95,10 @@ interface IHouse {
   longitude: number;
   bedrooms: number;
   price: number;
+  description: string;
+  space: number;
+  build: number;
+  maintainance: number;
   image: string;
   publicId: string;
 }
@@ -105,10 +117,14 @@ export default function HouseForm({ house }: IProps) {
     defaultValues: house
       ? {
           address: house.address,
+          description: house.description,
           latitude: house.latitude,
           longitude: house.longitude,
           bedrooms: house.bedrooms.toString(),
           price: house.price.toString(),
+          space: house.space.toString(),
+          build: house.build.toString(),
+          maintainance: house.maintainance.toString(),
         }
       : {},
   });
@@ -141,6 +157,7 @@ export default function HouseForm({ house }: IProps) {
         variables: {
           input: {
             address: data.address,
+            description: data.description,
             image: imageData.secure_url,
             coordinates: {
               latitude: data.latitude,
@@ -148,6 +165,9 @@ export default function HouseForm({ house }: IProps) {
             },
             bedrooms: parseInt(data.bedrooms, 10),
             price: parseInt(data.price, 10),
+            space: parseInt(data.space, 10),
+            build: parseInt(data.build, 10),
+            maintainance: parseInt(data.maintainance, 10),
           },
         },
       });
@@ -179,6 +199,7 @@ export default function HouseForm({ house }: IProps) {
         id: currentHouse.id,
         input: {
           address: data.address,
+          description: data.description,
           image: image,
           coordinates: {
             latitude: data.latitude,
@@ -186,6 +207,9 @@ export default function HouseForm({ house }: IProps) {
           },
           bedrooms: parseInt(data.bedrooms, 10),
           price: parseInt(data.price, 10),
+          space: parseInt(data.space, 10),
+          build: parseInt(data.build, 10),
+          maintainance: parseInt(data.maintainance, 10),
         },
       },
     });
@@ -300,6 +324,21 @@ export default function HouseForm({ house }: IProps) {
           </div>
 
           <div className="mt-4">
+            <label htmlFor="description" className="block">
+              Description
+            </label>
+            <input
+              id="description"
+              name="description"
+              type="text"
+              className="p-2"
+              ref={register({
+                required: "Please enter the description",
+              })}
+            />
+          </div>
+
+          <div className="mt-4">
             <label htmlFor="price" className="block">
               Price
             </label>
@@ -319,6 +358,72 @@ export default function HouseForm({ house }: IProps) {
               })}
             />
             {errors.price && <p>{errors.price.message}</p>}
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="space" className="block">
+              Space
+            </label>
+            €{" "}
+            <input
+              id="space"
+              name="space"
+              type="number"
+              className="p-2"
+              ref={register({
+                required: "Please enter the Space",
+                max: {
+                  value: 10000000,
+                  message: "Wooahh, that's too expensive",
+                },
+                min: { value: 1, message: "Must have at least 1 €" },
+              })}
+            />
+            {errors.space && <p>{errors.space.message}</p>}
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="build" className="block">
+              build
+            </label>
+            €{" "}
+            <input
+              id="build"
+              name="build"
+              type="number"
+              className="p-2"
+              ref={register({
+                required: "Please enter the build",
+                max: {
+                  value: 10000000,
+                  message: "Wooahh, that's too expensive",
+                },
+                min: { value: 1, message: "Must have at least 1 €" },
+              })}
+            />
+            {errors.build && <p>{errors.build.message}</p>}
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="maintainance" className="block">
+              maintainance
+            </label>
+            €{" "}
+            <input
+              id="maintainance"
+              name="maintainance"
+              type="number"
+              className="p-2"
+              ref={register({
+                required: "Please enter the maintainance",
+                max: {
+                  value: 10000000,
+                  message: "Wooahh, that's too expensive",
+                },
+                min: { value: 1, message: "Must have at least 1 €" },
+              })}
+            />
+            {errors.maintainance && <p>{errors.maintainance.message}</p>}
           </div>
 
           <div className="mt-4">
