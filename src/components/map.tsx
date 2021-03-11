@@ -13,8 +13,8 @@ interface IProps {}
 export default function Map({}: IProps) {
   const mapRef = useRef<MapRef | null>(null);
   const [viewport, setViewport] = useState<ViewState>({
-    latitude: 43,
-    longitude: -79,
+    latitude: 62.601,
+    longitude: 29.7636,
     zoom: 10,
   });
 
@@ -25,7 +25,7 @@ export default function Map({}: IProps) {
         width="100%"
         height="calc(100vh - 64px)"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        onViewportChange={(nextViewport) => setViewport(nextViewport)}
+        onViewportChange={(nextViewport: any) => setViewport(nextViewport)}
         ref={(instance) => (mapRef.current = instance)}
         minZoom={5}
         maxZoom={15}
