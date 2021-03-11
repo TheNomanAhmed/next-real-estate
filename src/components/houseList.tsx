@@ -13,7 +13,7 @@ export default function HouseList({ houses, setHighlightedId }: IProps) {
       {houses.map((house) => (
         <Link key={house.id} href={`/houses/${house.id}`}>
           <div
-            className="px-2 pt-2 cursor-pointer flex flex-col flex-wrap md:w-1/2"
+            className="px-2 pt-2 mb-4 cursor-pointer flex flex-col flex-wrap md:w-1/2 self-start"
             onMouseEnter={() => setHighlightedId(house.id)}
             onMouseLeave={() => setHighlightedId(null)}
           >
@@ -32,9 +32,25 @@ export default function HouseList({ houses, setHighlightedId }: IProps) {
               />
             </div>
             <div className="sm:w-full sm:pl-0 mt-2">
-              <h2 className="text-sm">{house.address}</h2>
-              <div>{house.price} €</div>
-              <p>{house.bedrooms}.0 bd</p>
+              <div className="flex justify-between">
+                <h2 className="text-lg font-semibold">
+                  {house.address.split(/(,)/).shift()}
+                </h2>
+
+                <div className="text-lg font-semibold">
+                  {house.price.toLocaleString()} €
+                </div>
+              </div>
+
+              <div className="flex justify-between">
+                <h2 className="text-sm">
+                  {house.address.split(/(,)/).slice(-3)}
+                </h2>
+                <div>
+                  <span className="text-sm">{house.bedrooms}.0 bd</span> ·
+                  <span className="text-sm"> {house.space}.00 m²</span>
+                </div>
+              </div>
             </div>
           </div>
         </Link>

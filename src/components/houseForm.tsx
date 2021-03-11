@@ -364,7 +364,6 @@ export default function HouseForm({ house }: IProps) {
             <label htmlFor="space" className="block">
               Space
             </label>
-            €{" "}
             <input
               id="space"
               name="space"
@@ -373,20 +372,19 @@ export default function HouseForm({ house }: IProps) {
               ref={register({
                 required: "Please enter the Space",
                 max: {
-                  value: 10000000,
+                  value: 10000,
                   message: "Wooahh, that's too expensive",
                 },
                 min: { value: 1, message: "Must have at least 1 €" },
               })}
-            />
-            {errors.space && <p>{errors.space.message}</p>}
+            />{" "}
+            m²
           </div>
 
           <div className="mt-4">
             <label htmlFor="build" className="block">
-              build
+              Build year
             </label>
-            €{" "}
             <input
               id="build"
               name="build"
@@ -400,15 +398,14 @@ export default function HouseForm({ house }: IProps) {
                 },
                 min: { value: 1, message: "Must have at least 1 €" },
               })}
-            />
-            {errors.build && <p>{errors.build.message}</p>}
+            />{" "}
+            Year
           </div>
 
           <div className="mt-4">
             <label htmlFor="maintainance" className="block">
-              maintainance
+              Maintenance
             </label>
-            €{" "}
             <input
               id="maintainance"
               name="maintainance"
@@ -422,20 +419,22 @@ export default function HouseForm({ house }: IProps) {
                 },
                 min: { value: 1, message: "Must have at least 1 €" },
               })}
-            />
-            {errors.maintainance && <p>{errors.maintainance.message}</p>}
+            />{" "}
+            €/m²
           </div>
 
           <div className="mt-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-green-600 font-bold py-2 px-4 mr-4 rounded"
               type="submit"
               disabled={submitting}
             >
               Save
-            </button>{" "}
+            </button>
             <Link href={house ? `/houses/${house.id}` : "/"}>
-              <a>Cancel</a>
+              <a className=" hover:bg-red-900 font-bold py-2 px-4 mr-4 rounded">
+                Cancel
+              </a>
             </Link>
           </div>
         </>
