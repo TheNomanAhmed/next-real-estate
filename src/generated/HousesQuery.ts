@@ -17,6 +17,7 @@ export interface HousesQuery_houses {
   address: string;
   publicId: string;
   bedrooms: number;
+  price: number;
 }
 
 export interface HousesQuery {

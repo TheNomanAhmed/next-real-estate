@@ -17,6 +17,7 @@ export interface UpdateHouseMutation_updateHouse {
   latitude: number;
   longitude: number;
   bedrooms: number;
+  price: number;
   address: string;
 }
 

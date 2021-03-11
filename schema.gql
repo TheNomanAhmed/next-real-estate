@@ -21,6 +21,7 @@ type House {
   latitude: Float!
   longitude: Float!
   nearby: [House!]!
+  price: Int!
   publicId: String!
   userId: String!
 }
@@ -30,6 +31,7 @@ input HouseInput {
   bedrooms: Int!
   coordinates: CoordinatesInput!
   image: String!
+  price: Int!
 }
 
 type ImageSignature {

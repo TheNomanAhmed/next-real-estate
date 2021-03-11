@@ -15,11 +15,7 @@ const Layout: FunctionComponent<IProps> = ({ main }) => {
         <div className="px-6 flex items-center justify-between h-16">
           <Link href="/">
             <a>
-              <img
-                src="/home-color.svg"
-                alt="home house"
-                className="inline w-6"
-              />
+              <img src="/logo.svg" alt="home house" className="inline w-24" />
             </a>
           </Link>
           {authenticated ? (

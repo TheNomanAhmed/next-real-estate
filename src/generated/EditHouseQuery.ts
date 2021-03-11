@@ -15,6 +15,7 @@ export interface EditHouseQuery_house {
   image: string;
   publicId: string;
   bedrooms: number;
+  price: number;
   latitude: number;
   longitude: number;
 }

@@ -41,6 +41,7 @@ const UPDATE_HOUSE_MUTATION = gql`
       latitude
       longitude
       bedrooms
+      price
       address
     }
   }
@@ -75,6 +76,7 @@ interface IFormData {
   latitude: number;
   longitude: number;
   bedrooms: string;
+  price: string;
   image: FileList;
 }
 
@@ -84,6 +86,7 @@ interface IHouse {
   latitude: number;
   longitude: number;
   bedrooms: number;
+  price: number;
   image: string;
   publicId: string;
 }
@@ -105,6 +108,7 @@ export default function HouseForm({ house }: IProps) {
           latitude: house.latitude,
           longitude: house.longitude,
           bedrooms: house.bedrooms.toString(),
+          price: house.price.toString(),
         }
       : {},
   });
@@ -143,6 +147,7 @@ export default function HouseForm({ house }: IProps) {
               longitude: data.longitude,
             },
             bedrooms: parseInt(data.bedrooms, 10),
+            price: parseInt(data.price, 10),
           },
         },
       });
@@ -180,6 +185,7 @@ export default function HouseForm({ house }: IProps) {
             longitude: data.longitude,
           },
           bedrooms: parseInt(data.bedrooms, 10),
+          price: parseInt(data.price, 10),
         },
       },
     });
@@ -291,6 +297,28 @@ export default function HouseForm({ house }: IProps) {
               })}
             />
             {errors.bedrooms && <p>{errors.bedrooms.message}</p>}
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="price" className="block">
+              Price
+            </label>
+            €{" "}
+            <input
+              id="price"
+              name="price"
+              type="number"
+              className="p-2"
+              ref={register({
+                required: "Please enter the Price",
+                max: {
+                  value: 10000000,
+                  message: "Wooahh, that's too expensive",
+                },
+                min: { value: 1, message: "Must have at least 1 €" },
+              })}
+            />
+            {errors.price && <p>{errors.price.message}</p>}
           </div>
 
           <div className="mt-4">

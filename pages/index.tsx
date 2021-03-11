@@ -17,6 +17,7 @@ const HOUSES_QUERY = gql`
       address
       publicId
       bedrooms
+      price
     }
   }
 `;
