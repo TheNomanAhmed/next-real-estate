@@ -34,8 +34,8 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
         width="100%"
         height="100%"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        transitionDuration={0} // add TransitionDuration
-        transitionInterpolator={new FlyToInterpolator()}
+        transitionDuration={150}
+        transitionInterpolator={new FlyToInterpolator({ speed: 0.1 })}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         ref={(instance) => (mapRef.current = instance)}
         minZoom={5}
@@ -63,7 +63,7 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
                   ...old,
                   latitude,
                   longitude,
-                  zoom: 12,
+                  zoom: 10,
                 }));
                 if (mapRef.current) {
                   const bounds = mapRef.current.getMap().getBounds();
@@ -79,13 +79,31 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
             latitude={house.latitude}
             longitude={house.longitude}
             offsetLeft={-15}
-            offsetTop={-15}
+            offsetTop={0}
             className={highlightedId === house.id ? "marker-active" : ""}
           >
             <button
               style={{ width: "30px", height: "30px", fontSize: "30px" }}
               type="button"
-              onClick={() => setSelected(house)}
+              onClick={() => {
+                setSelected(house);
+                if (house.latitude && house.longitude) {
+                  setViewport((old) => ({
+                    ...old,
+                    latitude: house.latitude,
+                    longitude: house.longitude,
+                    zoom: 12,
+                    transitionDuration: 5, // add TransitionDuration
+                    transitionInterpolator: new FlyToInterpolator({
+                      speed: 0.1,
+                    }),
+                  }));
+                  if (mapRef.current) {
+                    const bounds = mapRef.current.getMap().getBounds();
+                    setDataBounds(JSON.stringify(bounds.toArray()));
+                  }
+                }
+              }}
             >
               <img
                 src={
@@ -107,22 +125,32 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
             onClose={() => setSelected(null)}
             closeOnClick={false}
           >
-            <div className="text-center">
-              <h3 className="px-4">{selected.address.substr(0, 30)}</h3>
-              <Image
-                className="mx-auto my-4"
-                cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
-                publicId={selected.publicId}
-                secure
-                dpr="auto"
-                quality="auto"
-                width={200}
-                height={Math.floor((9 / 16) * 200)}
-                crop="fill"
-                gravity="auto"
-              />
+            <div className="text-center ">
+              <h3 className="px-2 text-xs">
+                {selected.address.substr(0, 25)}...
+              </h3>
+              <div className="relative">
+                <Image
+                  className="mx-auto my-2"
+                  cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
+                  publicId={selected.publicId}
+                  secure
+                  dpr="auto"
+                  quality="auto"
+                  width={200}
+                  height={Math.floor((9 / 16) * 200)}
+                  crop="fill"
+                  gravity="auto"
+                />
+                <div className="text-xs absolute bottom-0 right-0 bg-white px-2 py-1">
+                  <span>{selected.price.toLocaleString()} €</span>
+                </div>
+                <div className="text-xs absolute bottom-0 left-0 bg-white px-2 py-1">
+                  <span>{selected.space}.00 m²</span>
+                </div>
+              </div>
               <Link href={`/houses/${selected.id}`}>
-                <a>View House</a>
+                <a className=" hover:text-red-400 font-bold">View House</a>
               </Link>
             </div>
           </Popup>

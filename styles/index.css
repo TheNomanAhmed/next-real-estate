@@ -49,3 +49,21 @@ input {
 ::-webkit-scrollbar-thumb:hover {
   background: #b30000;
 }
+
+
+
+.mapboxgl-popup-close-button {
+  font-size: 1.5rem;
+  padding: 0px 6px;
+  color: white;
+  background-color: #fb6f6f !important;
+}
+
+.mapboxgl-popup-close-button:hover {
+  color: white;
+  background-color: #df2828 !important;
+}
+
+.mapboxgl-popup-content {
+  padding: 10px 0px 15px !important;
+}
