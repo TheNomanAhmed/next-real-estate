@@ -28,11 +28,11 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
   });
 
   return (
-    <div className="text-black relative">
+    <div className="text-black relative h-full sm:h-full">
       <ReactMapGL
         {...viewport}
         width="100%"
-        height="calc(100vh - 64px)"
+        height="100%"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
         transitionDuration={0} // add TransitionDuration
         transitionInterpolator={new FlyToInterpolator()}

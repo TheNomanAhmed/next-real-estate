@@ -229,7 +229,10 @@ export default function HouseForm({ house }: IProps) {
   };
 
   return (
-    <form className="mx-auto max-w-xl py-4" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="mx-auto max-w-xl py-4 px-4"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h1 className="text-xl">
         {house ? `Editing ${house.address}` : "Add a New House"}
       </h1>
@@ -342,7 +345,6 @@ export default function HouseForm({ house }: IProps) {
             <label htmlFor="price" className="block">
               Price
             </label>
-            €{" "}
             <input
               id="price"
               name="price"
@@ -356,8 +358,8 @@ export default function HouseForm({ house }: IProps) {
                 },
                 min: { value: 1, message: "Must have at least 1 €" },
               })}
-            />
-            {errors.price && <p>{errors.price.message}</p>}
+            />{" "}
+            €{errors.price && <p>{errors.price.message}</p>}
           </div>
 
           <div className="mt-4">

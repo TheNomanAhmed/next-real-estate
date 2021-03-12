@@ -25,30 +25,36 @@ export default function HouseList({ houses, setHighlightedId }: IProps) {
                 secure
                 dpr="auto"
                 quality="auto"
-                width={350}
-                height={Math.floor((9 / 16) * 350)}
+                width={434}
+                height={Math.floor((9 / 16) * 434)}
                 crop="fill"
                 gravity="auto"
               />
             </div>
             <div className="sm:w-full sm:pl-0 mt-2">
-              <div className="flex justify-between">
-                <h2 className="text-lg font-semibold">
+              <div className="flex justify-between items-center">
+                <h2 className="text-md md:text-xs lg:text-md xl:text-lg font-semibold">
                   {house.address.split(/(,)/).shift()}
                 </h2>
 
-                <div className="text-lg font-semibold">
+                <div className="text-md md:text-xs lg:text-md xl:text-lg font-semibold">
                   {house.price.toLocaleString()} €
                 </div>
               </div>
 
-              <div className="flex justify-between">
-                <h2 className="text-sm">
+              <div className="flex justify-between items-center">
+                <h2 className="text-sm md:text-xs xl:text-sm">
                   {house.address.split(/(,)/).slice(-3)}
                 </h2>
                 <div>
-                  <span className="text-sm">{house.bedrooms}.0 bd</span> ·
-                  <span className="text-sm"> {house.space}.00 m²</span>
+                  <span className="text-sm md:text-xs xl:text-sm">
+                    {house.bedrooms}.0 bd
+                  </span>{" "}
+                  ·
+                  <span className="text-sm md:text-xs xl:text-sm">
+                    {" "}
+                    {house.space}.00 m²
+                  </span>
                 </div>
               </div>
             </div>

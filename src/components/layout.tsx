@@ -12,7 +12,7 @@ const Layout: FunctionComponent<IProps> = ({ main }) => {
   return (
     <div className="bg-gray-900 max-w-screen-2xl mx-auto text-white">
       <nav className="bg-gray-800" style={{ height: "64px" }}>
-        <div className="px-6 flex items-center justify-between h-16">
+        <div className="px-1 sm:px-6 flex items-center justify-between h-16">
           <Link href="/">
             <a>
               <img src="/logo.svg" alt="home house" className="inline w-24" />
@@ -36,7 +36,7 @@ const Layout: FunctionComponent<IProps> = ({ main }) => {
                       d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                     />
                   </svg>
-                  <span>Add New House</span>
+                  <span className="text-sm sm:text-md">Add House</span>
                 </div>
               </Link>
               <button onClick={logout} className="flex items-center">
@@ -65,6 +65,13 @@ const Layout: FunctionComponent<IProps> = ({ main }) => {
         </div>
       </nav>
       <main style={{ minHeight: "calc(100vh - 64px)" }}>{main}</main>
+      <footer className="py-8 px-4 flex items-center justify-center ">
+        <p className="text-xs text-gray-500 sm:w-1/2 text-center">
+          Note: This is not a real estate agency, this is just a side project
+          and the data is taken from Blok.fi, So if you are itnerested in any of
+          the details please contact them
+        </p>
+      </footer>
     </div>
   );
 };

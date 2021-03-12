@@ -62,9 +62,9 @@ export default function Home() {
   return (
     <Layout
       main={
-        <div className="flex">
+        <div className="flex flex-col-reverse sm:flex-row ">
           <div
-            className="w-1/2 pb-2 flex flex-wrap content-start"
+            className="h-1/2 sm:max-h-full sm:w-1/2 pb-2 flex flex-wrap justify-center content-start"
             style={{ maxHeight: "calc(100vh - 64px)", overflowY: "scroll" }}
           >
             <HouseList
@@ -72,7 +72,7 @@ export default function Home() {
               setHighlightedId={setHighlightedId}
             />
           </div>
-          <div className="w-1/2">
+          <div className="h-96 sm:h-screen sm:w-1/2">
             <Map
               setDataBounds={setDataBounds}
               houses={lastData ? lastData.houses : []}
