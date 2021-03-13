@@ -35,8 +35,8 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
         width="100%"
         height="100%"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        transitionDuration={200}
-        transitionInterpolator={new FlyToInterpolator({ screenSpeed: 10 })}
+        transitionDuration={50}
+        transitionInterpolator={new FlyToInterpolator()}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         ref={(instance) => (mapRef.current = instance)}
         minZoom={5}
@@ -55,10 +55,10 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
           }
         }}
       >
-        <div className="absolute sm:top-12 left-0 p-4">
+        <div className="absolute top-0 sm:top-12 left-0 p-4">
           <NavigationControl showCompass={false} />
         </div>
-        <div className="absolute bottom-0 sm:top-0 w-full z-10 p-4">
+        <div className="search-box absolute sm:top-0 w-full z-10 p-4">
           <SearchBox
             defaultValue=""
             onSelectAddress={(_address, latitude, longitude) => {

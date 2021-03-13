@@ -69,5 +69,11 @@ input {
 }
 
 .mapboxgl-ctrl-logo {
-  display: none !important;
+  opacity: 0.3 !important;
+}
+
+@media (max-width: 640px) {
+  .search-box {
+    bottom: 0px;
+  }
 }
