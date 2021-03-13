@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { Image } from "cloudinary-react";
 import ReactMapGL, {
@@ -6,6 +6,7 @@ import ReactMapGL, {
   Popup,
   ViewState,
   FlyToInterpolator,
+  NavigationControl,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useLocalState } from "src/utils/useLocalState";
@@ -34,8 +35,8 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
         width="100%"
         height="100%"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        transitionDuration={150}
-        transitionInterpolator={new FlyToInterpolator({ speed: 0.1 })}
+        transitionDuration={200}
+        transitionInterpolator={new FlyToInterpolator({ screenSpeed: 10 })}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         ref={(instance) => (mapRef.current = instance)}
         minZoom={5}
@@ -54,7 +55,10 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
           }
         }}
       >
-        <div className="absolute top-0 w-full z-10 p-4">
+        <div className="absolute sm:top-12 left-0 p-4">
+          <NavigationControl showCompass={false} />
+        </div>
+        <div className="absolute bottom-0 sm:top-0 w-full z-10 p-4">
           <SearchBox
             defaultValue=""
             onSelectAddress={(_address, latitude, longitude) => {
@@ -93,10 +97,6 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
                     latitude: house.latitude,
                     longitude: house.longitude,
                     zoom: 12,
-                    transitionDuration: 5, // add TransitionDuration
-                    transitionInterpolator: new FlyToInterpolator({
-                      speed: 0.1,
-                    }),
                   }));
                   if (mapRef.current) {
                     const bounds = mapRef.current.getMap().getBounds();
@@ -122,6 +122,7 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
           <Popup
             latitude={selected.latitude}
             longitude={selected.longitude}
+            dynamicPosition={false}
             onClose={() => setSelected(null)}
             closeOnClick={false}
           >

@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-import { FunctionComponent } from "react";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,

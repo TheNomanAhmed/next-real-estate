@@ -67,3 +67,7 @@ input {
 .mapboxgl-popup-content {
   padding: 10px 0px 15px !important;
 }
+
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
