@@ -35,12 +35,11 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
         width="100%"
         height="100%"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
-        transitionDuration={50}
-        transitionInterpolator={new FlyToInterpolator()}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         ref={(instance) => (mapRef.current = instance)}
         minZoom={5}
         maxZoom={15}
+        transitionInterpolator={new FlyToInterpolator()}
         mapStyle="mapbox://styles/leighhalliday/ckhjaksxg0x2v19s1ovps41ef"
         onLoad={() => {
           if (mapRef.current) {
@@ -97,6 +96,10 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
                     latitude: house.latitude,
                     longitude: house.longitude,
                     zoom: 12,
+                    transitionDuration: "auto",
+                    transitionInterpolator: new FlyToInterpolator({
+                      speed: 1.2,
+                    }),
                   }));
                   if (mapRef.current) {
                     const bounds = mapRef.current.getMap().getBounds();
