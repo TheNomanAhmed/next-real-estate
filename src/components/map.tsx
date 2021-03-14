@@ -7,6 +7,7 @@ import ReactMapGL, {
   ViewState,
   FlyToInterpolator,
   NavigationControl,
+  GeolocateControl,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useLocalState } from "src/utils/useLocalState";
@@ -37,7 +38,7 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         ref={(instance) => (mapRef.current = instance)}
-        minZoom={5}
+        minZoom={2}
         maxZoom={15}
         transitionInterpolator={new FlyToInterpolator()}
         mapStyle="mapbox://styles/leighhalliday/ckhjaksxg0x2v19s1ovps41ef"
@@ -55,6 +56,7 @@ export default function Map({ setDataBounds, houses, highlightedId }: IProps) {
         }}
       >
         <div className="absolute top-0 sm:top-12 left-0 p-4">
+          <GeolocateControl className="mb-2" />
           <NavigationControl showCompass={false} />
         </div>
         <div className="search-box absolute sm:top-0 w-full z-10 p-4">
